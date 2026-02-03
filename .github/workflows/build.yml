@@ -21,10 +21,13 @@ jobs:
           pkg-config \
           python3-dev \
           python3-pip
+        which ninja
+        which g++
 
     - name: Install vcpkg
       run: |
         git clone https://github.com/microsoft/vcpkg.git
+        ./vcpkg/bootstrap-vcpkg.sh
         echo "VCPKG_ROOT=$PWD/vcpkg" >> $GITHUB_ENV
 
     - name: Configure
