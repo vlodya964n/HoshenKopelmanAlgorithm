@@ -1,3 +1,7 @@
+## Hoshen Kopelman Algorithm
+----
+Module for python
+
 ## Requirements
 
 - Linux / WSL
