@@ -22,7 +22,6 @@ sudo apt install -y \
   python3-dev \
   python3-pip
 
-```bash
 git clone https://github.com/username/HoshenKopelmanLattice.git
 cd HoshenKopelmanLattice
 
