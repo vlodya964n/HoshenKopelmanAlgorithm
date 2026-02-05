@@ -11,6 +11,13 @@ find_package(Eigen3 REQUIRED)
 set(SOURCES
     src/hoshen_kopelman_lattice.cpp
     src/alghoritm.h
+    src/utils.h
+    src/ObjectsSystem/Objects.h
+    src/ObjectsSystem/Objects.cpp
+    src/ClustersCalculate/clusters_calculate.h
+    src/ClustersCalculate/clusters_calculate.cpp
+    src/PercolationSystem/percolation_system.h
+    src/PercolationSystem/percolation_system.cpp
 )
 
 pybind11_add_module(hoshen_kopelman_lattice ${SOURCES})
