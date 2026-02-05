@@ -53,7 +53,6 @@ cmake --build build/release
 
 !cmake --build build -j
 
-%cd build
 !ls build/*.so
 
 import sys
