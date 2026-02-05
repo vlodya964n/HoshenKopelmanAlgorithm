@@ -30,3 +30,35 @@ export VCPKG_ROOT=~/vcpkg
 
 cmake --preset release
 cmake --build build/release
+```
+## Google Colab
+
+```bash
+!apt update
+!apt install -y \
+  build-essential \
+  cmake \
+  pkg-config
+
+!pip install pybind11
+
+!git clone https://github.com/vlodya964n/HoshenKopelmanAlgorithm.git
+%cd HoshenKopelmanAlgorithm
+
+!python3 -m pybind11 --cmakedir
+
+!cmake -B build -S . \
+  -Dpybind11_DIR=$(python3 -m pybind11 --cmakedir) \
+  -DCMAKE_BUILD_TYPE=Release
+
+!cmake --build build -j
+
+%cd build
+!ls build/*.so
+
+import sys
+sys.path.append("build")
+
+import hoshen_kopelman_lattice
+print(hoshen_kopelman_lattice)
+```
