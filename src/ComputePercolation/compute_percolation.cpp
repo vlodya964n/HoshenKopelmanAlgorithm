@@ -1,6 +1,7 @@
 #include "compute_percolation.h"
 
 #include <unordered_map>
+#include <iostream>
 
 using namespace perc;
 
@@ -27,6 +28,9 @@ void NonPeriodicBoundsLattice::process() {
 
 int PercolationAnalyzer::find_percolating_cluster() {
     const auto &c = sys.get_centers();
+
+    std::cout << "centers: " << c.size() << std::endl;
+    std::cout << "labels: " << labels.size() << std::endl;
 
     double L = sys.get_L();
     double reach = sys.get_r() + sys.get_shell();
