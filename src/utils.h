@@ -25,24 +25,29 @@ namespace perc {
         }
     };
 
+    struct Point {
+        double x;
+        double y;
+    };
+
     // ---------------- Случайное целое ----------------
-inline int random_linear_value(L_size_t min, L_size_t max) {
-    static thread_local std::mt19937 gen(std::random_device{}());
-    std::uniform_int_distribution<int> dist(min, max);
-    return dist(gen);
-}
+    inline int random_linear_value(L_size_t min, L_size_t max) {
+        static thread_local std::mt19937 gen(std::random_device{}());
+        std::uniform_int_distribution<int> dist(min, max);
+        return dist(gen);
+    }
 
-// ---------------- Случайное вещественное ----------------
-inline double random_real(double min=0.0, double max=1.0) {
-    static thread_local std::mt19937 gen(std::random_device{}());
-    std::uniform_real_distribution<double> dist(min, max);
-    return dist(gen);
-}
+    // ---------------- Случайное вещественное ----------------
+    inline double random_real(double max=1.0, double min=0.0) {
+        static thread_local std::mt19937 gen(std::random_device{}());
+        std::uniform_real_distribution<double> dist(min, max);
+        return dist(gen);
+    }
 
-// ---------------- Случайный bool с вероятностью ----------------
-inline bool random_bool(double p=0.5) {
-    static thread_local std::mt19937 gen(std::random_device{}());
-    std::bernoulli_distribution dist(p);
-    return dist(gen);
-}
+    // ---------------- Случайный bool с вероятностью ----------------
+    inline bool random_bool(double p=0.5) {
+        static thread_local std::mt19937 gen(std::random_device{}());
+        std::bernoulli_distribution dist(p);
+        return dist(gen);
+    }
 }

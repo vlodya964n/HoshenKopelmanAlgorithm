@@ -26,3 +26,18 @@ public:
         return cluster_volume;
     };
 };
+
+
+class PercolationAnalyzer {
+private:
+    const CircleSystem& sys;
+    const std::vector<int>& labels;
+
+    int find_percolating_cluster();
+public:
+    PercolationAnalyzer(const CircleSystem& sys_,
+                        const std::vector<int>& labels_)
+                        : sys{sys_}, labels {labels_} {};
+    bool has_percolation();
+    int percolation_cluster_size();
+};

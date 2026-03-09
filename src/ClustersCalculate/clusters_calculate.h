@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include <vector>
 
 #include "../ObjectsSystem/Objects.h"
 
@@ -29,4 +30,24 @@ public:
         calculate_volumes();
         return volume_counts;
     };
+};
+
+
+class UnionFind {
+private:
+    std::vector<int> parent;
+    std::vector<int> size;
+public:
+    UnionFind(int n);
+    int find(int x);
+    void unite(int a, int b);
+    int get_size(int x);
+};
+
+class ClusterFinder {
+private:
+    const CircleSystem& sys;
+public:
+    ClusterFinder(const CircleSystem& sys_) : sys{sys_} {};
+    std::vector<int> find_clusters();
 };

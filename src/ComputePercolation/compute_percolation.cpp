@@ -22,3 +22,50 @@ void NonPeriodicBoundsLattice::process() {
         }
     }
 };
+
+int PercolationAnalyzer::find_percolating_cluster() {
+    const auto &c = sys.get_centers();
+
+    double L = sys.get_L();
+
+    std::unordered_map<int,bool> left;
+    std::unordered_map<int,bool> right;
+
+    for(size_t i=0;i<c.size();i++)
+    {
+        int cl = labels[i];
+
+        if(c[i].x < sys.get_r())
+            left[cl] = true;
+
+        if(c[i].x > L - sys.get_r())
+            right[cl] = true;
+    }
+
+    for(auto &p : left)
+    {
+        if(right[p.first])
+            return p.first;
+    }
+
+    return -1;
+}
+
+bool PercolationAnalyzer::has_percolation() {
+    return find_percolating_cluster() != -1;
+}
+
+int PercolationAnalyzer::percolation_cluster_size() {
+    int cluster = find_percolating_cluster();
+
+    if(cluster == -1)
+        return 0;
+
+    int count = 0;
+
+    for(int l : labels)
+        if(l == cluster)
+            count++;
+
+    return count;
+}

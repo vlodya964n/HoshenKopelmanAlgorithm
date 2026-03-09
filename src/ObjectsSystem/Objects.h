@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
 
@@ -33,4 +35,32 @@ public:
         return target_prob;
     }
     pybind11::array_t<perc::cell_t> to_numpy();
+};
+
+class CircleSystem {
+
+private:
+    std::vector<perc::Point> centers;
+    double L;
+    double prob;
+    double radius;
+    double shell;
+    int N;
+    void generate();
+    bool intersects_existing(double x, double y);
+    void compute_particle_number();
+
+public:
+    CircleSystem(double L_, double prob_)
+        : L{L_}, prob{prob_}, radius{0.5}, shell{0.2} {
+            generate();
+        };
+
+    const std::vector<perc::Point>& get_centers() const
+        { return centers; };
+    int size() const { return centers.size(); }
+
+    double get_L() const { return L; }
+    double get_r() const { return radius; }
+    double get_shell() const { return shell; }
 };

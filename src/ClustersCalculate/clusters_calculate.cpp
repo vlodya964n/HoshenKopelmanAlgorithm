@@ -1,5 +1,7 @@
 #include "clusters_calculate.h"
 
+#include <algorithm>
+
 using namespace perc;
 
 void HoshenKopelmanLattice::process() {
@@ -105,3 +107,69 @@ void HoshenKopelmanLattice::calculate_volumes() {
     }
     delete index_volumes;
 };
+
+
+UnionFind::UnionFind(int n) {
+    parent.resize(n);
+    size.resize(n);
+
+    for(int i=0;i<n;i++) {
+        parent[i] = i;
+        size[i] = 1;
+    }
+}
+
+int UnionFind::find(int x) {
+    if (parent[x] != x) {
+        parent[x] = find(parent[x]);
+    }
+    return parent[x];
+}
+
+void UnionFind::unite(int a, int b) {
+    a = find(a);
+    b = find(b);
+
+    if (a == b) { return; }
+
+    if (size[a] < size[b]) {
+        std::swap(a,b);
+    }
+
+    parent[b] = a;
+    size[a] += size[b];
+}
+
+int UnionFind::get_size(int x) {
+    x = find(x);
+    return size[x];
+}
+
+std::vector<int> ClusterFinder::find_clusters() {
+    int N = sys.get_centers().size();
+
+    UnionFind uf(N);
+
+    double R = 2*(sys.get_r() + sys.get_shell());
+    double R2 = R*R;
+
+    const auto& c = sys.get_centers();
+
+    for(int i=0;i<N;i++) {
+        for(int j=i+1;j<N;j++) {
+            double dx = c[i].x - c[j].x;
+            double dy = c[i].y - c[j].y;
+
+            if(dx*dx + dy*dy <= R2)
+                uf.unite(i,j);
+        }
+    }
+
+    std::vector<int> labels(N);
+
+    for(int i=0;i<N;i++) {
+        labels[i] = uf.find(i);
+    }
+
+    return labels;
+}
