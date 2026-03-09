@@ -1,5 +1,7 @@
 #include "compute_percolation.h"
 
+#include <unordered_map>
+
 using namespace perc;
 
 void NonPeriodicBoundsLattice::process() {

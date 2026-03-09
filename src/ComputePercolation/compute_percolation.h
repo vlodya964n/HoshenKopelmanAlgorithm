@@ -1,7 +1,10 @@
 #pragma once
 
+#include <vector>
+
 #include "../utils.h"
 #include "../PercolationSystem/percolation_system.h"
+#include "../ObjectsSystem/Objects.h"
 
 class NonPeriodicBoundsLattice {
 private:
