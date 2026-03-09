@@ -42,10 +42,10 @@ int PercolationAnalyzer::find_percolating_cluster() {
     {
         int cl = labels[i];
 
-        if(c[i].x < reach)
+        if(c[i].y < reach)
             left[cl] = true;
 
-        if(c[i].x > L - reach)
+        if(c[i].y > L - reach)
             right[cl] = true;
     }
 
