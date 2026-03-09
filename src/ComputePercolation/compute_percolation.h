@@ -34,7 +34,7 @@ public:
 class PercolationAnalyzer {
 private:
     const CircleSystem& sys;
-    const std::vector<int>& labels;
+    const std::vector<int> labels;
 
     int find_percolating_cluster();
 public:

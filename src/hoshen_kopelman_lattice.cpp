@@ -35,6 +35,9 @@ PYBIND11_MODULE(hoshen_kopelman_lattice, m) {
     py::class_<CircleSystem>(m,"CircleSystem")
         .def(py::init<double,double>())
         .def("size",&CircleSystem::size)
+        .def("get_L", &CircleSystem::get_L)
+        .def("get_r", &CircleSystem::get_r)
+        .def("get_shell", &CircleSystem::get_shell)
         .def("get_centers",&CircleSystem::get_centers);
     py::class_<ClusterFinder>(m,"ClusterFinder")
         .def(py::init<const CircleSystem &>())

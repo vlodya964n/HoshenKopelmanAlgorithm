@@ -29,6 +29,7 @@ int PercolationAnalyzer::find_percolating_cluster() {
     const auto &c = sys.get_centers();
 
     double L = sys.get_L();
+    double reach = sys.get_r() + sys.get_shell();
 
     std::unordered_map<int,bool> left;
     std::unordered_map<int,bool> right;
@@ -37,10 +38,10 @@ int PercolationAnalyzer::find_percolating_cluster() {
     {
         int cl = labels[i];
 
-        if(c[i].x < sys.get_r())
+        if(c[i].x < reach)
             left[cl] = true;
 
-        if(c[i].x > L - sys.get_r())
+        if(c[i].x > L - reach)
             right[cl] = true;
     }
 
